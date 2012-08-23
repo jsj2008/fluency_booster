@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12A269" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="KKCard" representedClassName="KKCard" syncable="YES">
+        <attribute name="attentionCheck" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="audioQuestion" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageLandscapePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imagePortraitPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="fluencyBooster" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="KKFluencyBooster" inverseName="cards" inverseEntity="KKFluencyBooster" syncable="YES"/>
+    </entity>
+    <entity name="KKFluencyBooster" representedClassName="KKFluencyBooster" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="KKCard" inverseName="fluencyBooster" inverseEntity="KKCard" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="KKCard" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="KKFluencyBooster" positionX="0" positionY="0" width="128" height="75"/>
+    </elements>
+</model>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="zRX-ne-nZk">
+    <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+    </dependencies>
+    <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
+                <viewController id="2" customClass="KKRootViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="16">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jkw-LS-ziw">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="2NK-cd-XdU">
+                            <connections>
+                                <segue destination="NMQ-ne-DnK" kind="push" identifier="PresentFluencyBooster" id="Ikn-Ov-v0Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2309" y="952"/>
+        </scene>
+        <!--Fluency Booster View Controller-->
+        <scene sceneID="hoF-JU-yUy">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YRv-NK-GgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="NMQ-ne-DnK" customClass="KKFluencyBoosterViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O79-Vd-WPw">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="bRE-e8-lSn">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="SNa-SL-nEg">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qca-mV-JFy">
+                                        <rect key="frame" x="394" y="646" width="70" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="TdC-vg-mbY">
+                                        <rect key="frame" x="305" y="649" width="57" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="NMQ-ne-DnK" id="kSz-Vx-adY"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="/" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hDa-3V-h3d">
+                                        <rect key="frame" x="377" y="647" width="22" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eL5-PC-0j5">
+                                        <rect key="frame" x="493" y="646" width="114" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Clean Marks">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearMarks:" destination="NMQ-ne-DnK" eventType="touchUpInside" id="gHY-uO-sdo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="2rW-Bw-SpL" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="44" width="768" height="585"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="NMQ-ne-DnK" id="K5c-3r-dtC"/>
+                                    <outlet property="delegate" destination="NMQ-ne-DnK" id="kW5-gn-QPl"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="G9Z-ns-10R"/>
+                    <connections>
+                        <outlet property="backgroundImage" destination="bRE-e8-lSn" id="vRt-h6-Zk3"/>
+                        <outlet property="carousel" destination="2rW-Bw-SpL" id="0un-Ph-UTj"/>
+                        <outlet property="currentPageIndexTextField" destination="TdC-vg-mbY" id="R3Z-PD-ADz"/>
+                        <outlet property="totalPagesLabel" destination="qca-mV-JFy" id="hGp-uD-hcL"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3195" y="952"/>
+        </scene>
+        <!--Data View Controller-->
+        <scene sceneID="7">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="KKDataViewController" id="5" customClass="KKDataViewController" sceneMemberID="viewController">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="12">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="MYz-DV-RER">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.10000000000000014" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Dh-F8-OYt">
+                                <rect key="frame" x="180" y="333" width="408" height="337"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="checkCard:" destination="5" eventType="touchUpInside" id="UvZ-xD-maO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2cf-1w-Oft">
+                                <rect key="frame" x="599" y="135" width="95" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="play song">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSong:" destination="5" eventType="touchUpInside" id="T5F-jV-f09"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97826086960000003" green="0.91848131079999995" blue="0.73914263440000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardImageView" destination="MYz-DV-RER" id="eS5-xn-G04"/>
+                        <outlet property="checkCardButton" destination="2Dh-F8-OYt" id="kSm-oR-YTJ"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2309" y="2107"/>
+        </scene>
+        <!--Navigation Controller - Fluency Booster-->
+        <scene sceneID="njc-Z7-VLi">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Gg-ge-WYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController title="Fluency Booster" definesPresentationContext="YES" modalPresentationStyle="currentContext" id="zRX-ne-nZk" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zp3-aA-t6F">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lSZ-tr-CSH" kind="relationship" relationship="rootViewController" id="iVW-T4-lzB"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="172" y="944"/>
+        </scene>
+        <!--Fluency Booster Selection View Controller-->
+        <scene sceneID="pPY-fF-tby">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7PL-kG-X8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lSZ-tr-CSH" customClass="KKFluencyBoosterSelectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vM4-Po-4lK">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="cLb-HT-FiQ">
+                                <rect key="frame" x="212" y="289" width="344" height="381"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FluencyBoosterCell" textLabel="F0j-8l-0rw" style="IBUITableViewCellStyleDefault" id="yLf-9A-mU9">
+                                        <rect key="frame" x="0.0" y="34" width="344" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="304" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F0j-8l-0rw">
+                                                    <rect key="frame" x="10" y="0.0" width="284" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="2" kind="push" identifier="PushFluencyBooster" id="ZBn-Jb-i4A"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="lSZ-tr-CSH" id="UWO-s3-kEo"/>
+                                    <outlet property="delegate" destination="lSZ-tr-CSH" id="ZMJ-NO-Aeu"/>
+                                </connections>
+                            </tableView>
+                            <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="DFd-XZ-TgZ">
+                                <rect key="frame" x="264" y="678" width="240" height="262"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dcA-rj-cec"/>
+                    <connections>
+                        <outlet property="fluencyBoosterTableView" destination="cLb-HT-FiQ" id="kgn-sS-jYf"/>
+                        <outlet property="introHelpImageView" destination="DFd-XZ-TgZ" id="HY6-4B-hjy"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1172" y="944"/>
+        </scene>
+        <!--Help View Controller-->
+        <scene sceneID="5Tu-hK-i0y">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJI-kd-Fc2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="KKHelpViewController" id="ZmW-1c-CBf" customClass="KKHelpViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ne0-7l-Xl6">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="VfA-Ch-5z2">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.25847018494897955" green="0.25847018494897955" blue="0.25847018494897955" alpha="0.5" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="helpImageView" destination="VfA-Ch-5z2" id="jZa-8U-WAU"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1756" y="-448"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="KKAncestorViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKAncestorViewController.h"/>
+        </class>
+        <class className="KKDataViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKDataViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="checkCard:" candidateClass="UIButton"/>
+                <relationship kind="action" name="playSong:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cardImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="checkCardButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="KKFluencyBoosterSelectionViewController" superclassName="KKAncestorViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKFluencyBoosterSelectionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="fluencyBoosterTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="introHelpImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="KKFluencyBoosterViewController" superclassName="KKAncestorViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKFluencyBoosterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="clearMarks:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="carousel" candidateClass="iCarousel"/>
+                <relationship kind="outlet" name="currentPageIndexTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="totalPagesLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="KKHelpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKHelpViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="helpImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="KKRootViewController" superclassName="KKAncestorViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKRootViewController.h"/>
+        </class>
+        <class className="iCarousel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iCarousel.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
