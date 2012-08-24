@@ -13,80 +13,95 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+@interface KKAppDelegate()
+
+@property (strong) NSString* fluencyBoosterResourcesPath;
+@property (strong) NSString* fluencyBoostersPath;
+
+@end
+
 @implementation KKAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+@synthesize fluencyBoosterResourcesPath = _fluencyBoosterResourcesPath;
+@synthesize fluencyBoostersPath = _fluencyBoostersPath;
+
+NSString* const fluencyBoosterResources = @"FluencyBoosterResources";
+NSString* const fluencyBoosters = @"Fluency Boosters";
+NSString* const portrait = @"portrait";
+NSString* const landscape = @"landscape";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    
-    //Creating test objects on the database
-    NSManagedObjectContext* context = self.managedObjectContext;
-    
-    NSFetchRequest* countFetchRequest = [[NSFetchRequest alloc] init];
-    countFetchRequest.entity = [NSEntityDescription entityForName:@"KKFluencyBooster" inManagedObjectContext:context];
-    NSError* error;
-    NSUInteger count = [context countForFetchRequest:countFetchRequest error:&error];
-    if (count == 0) {
-        //Getting the resource folder where are the fluency boosters.
-        NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-        NSString* fluencyBoosterResourcesPath = [resourcePath stringByAppendingPathComponent:@"FluencyBoosterResources"];
-        NSString* fluencyBoostersPath = [fluencyBoosterResourcesPath stringByAppendingPathComponent:@"Fluency Boosters"];
-        //Getting the fluency booster folder content.
-        NSArray* fluencyBoosterNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:fluencyBoostersPath error:&error];
-        
-        if (fluencyBoosterNames != nil) {
-            for (NSString* fluencyBoosterName in fluencyBoosterNames) {
-                KKFluencyBooster* fluencyBooster = [NSEntityDescription insertNewObjectForEntityForName:@"KKFluencyBooster" inManagedObjectContext:context];
-                fluencyBooster.name = fluencyBoosterName;
-                
-                NSString* cardsPath = [fluencyBoostersPath stringByAppendingPathComponent:fluencyBoosterName];
-                
-                NSArray* contentsName = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cardsPath error:&error];
-                
-                NSMutableSet* cards = [NSMutableSet set];
-                if (contentsName != nil) {
-                    for (NSString* contentName in contentsName) {
-                        NSArray* componentsOfContentName = [contentName componentsSeparatedByString:@"."];
-                        
-                        KKCard* card = [NSEntityDescription insertNewObjectForEntityForName:@"KKCard" inManagedObjectContext:context];
-                        
-                        if ([componentsOfContentName count] == 2 && [[componentsOfContentName objectAtIndex:1] isEqual:@"png"]) {
-                            card.imagePortrait = UIImagePNGRepresentation([UIImage imageWithContentsOfFile:[cardsPath stringByAppendingPathComponent:contentName]]);
-                            
-                            NSNumber* position = [NSNumber numberWithInt:[[componentsOfContentName objectAtIndex:0] intValue]];
-                            card.position = position;
-                            
-                            NSString* landscapeCardsPath = [cardsPath stringByAppendingPathComponent:@"landscape"];
-                            card.imageLandscape = UIImagePNGRepresentation([UIImage imageWithContentsOfFile:[landscapeCardsPath stringByAppendingPathComponent:contentName]]);
-                            
-                            NSString* audioPath = [cardsPath stringByAppendingPathComponent:@"audio"];
-                            
-                            NSString* audioQuestionsPath = [audioPath stringByAppendingPathComponent:@"question"];
-                            NSString* audioName = [NSString stringWithFormat:@"%@.mp3",[componentsOfContentName objectAtIndex:0]];
-                            
-                            NSData* audioQuestionData = [NSData dataWithContentsOfFile:[audioQuestionsPath stringByAppendingPathComponent:audioName]];
-                            if (audioQuestionData != nil) {
-                                card.audioQuestion = audioQuestionData;
-                            }
-                            
-                            [cards addObject:card];
-                        }
-                    }
-                }
-                fluencyBooster.cards = cards;
-            }
-        }
-    
-        if (![context save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        }
+    [self loadPaths];
+    if ([self countOfFluencyBoosterOnCoreData] == 0) {
+        [self loadCoreData];
     }
     return YES;
+}
+
+-(void)loadPaths{
+    NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
+    self.fluencyBoosterResourcesPath = [resourcePath stringByAppendingPathComponent:fluencyBoosterResources];
+    self.fluencyBoostersPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:fluencyBoosters];
+}
+
+-(void)loadCoreData{
+    NSError* error;
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSArray* fluencyBoostersFoldersName = [fileManager contentsOfDirectoryAtPath:self.fluencyBoostersPath error:&error];
+    for (NSString* fluencyBoosterFolderName in fluencyBoostersFoldersName) {
+        if (![fluencyBoosterFolderName hasSuffix:@"."]) {
+            KKFluencyBooster* fluencyBooster = [NSEntityDescription insertNewObjectForEntityForName:@"KKFluencyBooster" inManagedObjectContext:self.managedObjectContext];
+            
+            fluencyBooster.name = fluencyBoosterFolderName;
+            
+            NSString* fluencyBoosterFolderPath = [self.fluencyBoostersPath stringByAppendingPathComponent:fluencyBoosterFolderName];
+            NSString* portraitCardsPath = [fluencyBoosterFolderPath stringByAppendingPathComponent:portrait];
+            NSString* landscapeCardsPath = [fluencyBoosterFolderPath stringByAppendingPathComponent:landscape];
+            
+            NSArray* portraitCardsFolderContentNames = [fileManager contentsOfDirectoryAtPath:portraitCardsPath error:&error];
+            NSArray* landscapeCardsFolderContentNames = [fileManager contentsOfDirectoryAtPath:landscapeCardsPath error:&error];
+            
+            NSMutableArray* cards = [NSMutableArray array];
+            
+            if (portraitCardsFolderContentNames.count == landscapeCardsFolderContentNames.count) {
+                int countOfCards = portraitCardsFolderContentNames.count;
+                for (int i = 0; i <= countOfCards - 1; i++) {
+                    KKCard* card = [NSEntityDescription insertNewObjectForEntityForName:@"KKCard" inManagedObjectContext:self.managedObjectContext];
+                    
+                    NSString* portraitCardName = [portraitCardsFolderContentNames objectAtIndex:i];
+                    NSString* landscapeCardName = [landscapeCardsFolderContentNames objectAtIndex:i];
+                    
+                    NSString* portraitCardPath = [portraitCardsPath stringByAppendingPathComponent:portraitCardName];
+                    card.imagePortraitPath = portraitCardPath;
+                    NSString* landscapeCardPath = [landscapeCardsPath stringByAppendingPathComponent:landscapeCardName];
+                    card.imageLandscapePath = landscapeCardPath;
+                    
+                    int position = [[[portraitCardName componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
+                    card.position = [NSNumber numberWithInt:position];
+                    
+                    [cards addObject:card];
+                }
+            }else{
+                NSLog(@"Erro");
+            }
+            
+            fluencyBooster.cards = [NSSet setWithArray:cards];
+        }
+    }
+    [self.managedObjectContext save:&error];
+}
+
+-(NSUInteger)countOfFluencyBoosterOnCoreData{
+    NSFetchRequest* countFetchRequest = [[NSFetchRequest alloc] init];
+    countFetchRequest.entity = [NSEntityDescription entityForName:@"KKFluencyBooster" inManagedObjectContext:self.managedObjectContext];
+    NSError* error;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:countFetchRequest error:&error];
+    return count;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

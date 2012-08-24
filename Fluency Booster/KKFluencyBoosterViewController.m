@@ -83,10 +83,10 @@
 -(void)changeBackgroundImageToImageOfCard:(KKCard *)card{
     UIInterfaceOrientation interfaceOrientation = self.interfaceOrientation;
     if (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        self.backgroundImage.image = [UIImage imageWithData:card.imageLandscape];
+        self.backgroundImage.image = [UIImage imageWithContentsOfFile:card.imageLandscapePath];
     }
     if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.backgroundImage.image = [UIImage imageWithData:card.imagePortrait];
+        self.backgroundImage.image = [UIImage imageWithContentsOfFile:card.imagePortraitPath];
     }
 }
 
@@ -164,7 +164,7 @@
 	
     //set image.
     KKCard* miniCard = [[self.fluencyBooster sortedCardsByPosition] objectAtIndex:index];
-    miniCardImageView.image = [UIImage imageWithData:miniCard.imagePortrait];
+    miniCardImageView.image = [UIImage imageWithContentsOfFile:miniCard.imagePortraitPath];
     
     //set warning
     if (miniCard.attentionCheck) {

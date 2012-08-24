@@ -37,15 +37,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    KKCard* cardDataObject = self.dataObject;
     
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        self.cardImageView.image = [UIImage imageWithData:cardDataObject.imageLandscape];
-    }
-    
-    if (self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.cardImageView.image = [UIImage imageWithData:cardDataObject.imagePortrait];
-    }
+    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -53,11 +46,11 @@
     KKCard* cardDataObject = self.dataObject;
     
     if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        self.cardImageView.image = [UIImage imageWithData:cardDataObject.imageLandscape];
+        self.cardImageView.image = [UIImage imageWithContentsOfFile:cardDataObject.imageLandscapePath];
     }
     
     if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.cardImageView.image = [UIImage imageWithData:cardDataObject.imagePortrait];
+        self.cardImageView.image = [UIImage imageWithContentsOfFile:cardDataObject.imagePortraitPath];
     }
     
     return YES;

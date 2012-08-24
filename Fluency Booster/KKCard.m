@@ -19,4 +19,12 @@
 @dynamic position;
 @dynamic fluencyBooster;
 
+-(void)toggleAttentionCheck{
+    if (self.attentionCheck) {
+        self.attentionCheck  = nil;
+    }else{
+        self.attentionCheck = [NSNumber numberWithBool:YES];
+    }
+}
+
 @end

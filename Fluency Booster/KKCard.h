@@ -20,4 +20,6 @@
 @property (nonatomic, retain) NSNumber * position;
 @property (nonatomic, retain) KKFluencyBooster *fluencyBooster;
 
+-(void)toggleAttentionCheck;
+
 @end
