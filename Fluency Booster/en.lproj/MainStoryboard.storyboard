@@ -178,7 +178,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Gg-ge-WYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Fluency Booster" definesPresentationContext="YES" modalPresentationStyle="currentContext" id="zRX-ne-nZk" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zp3-aA-t6F">
+                    <navigationBar key="navigationBar" alpha="0.0" contentMode="scaleToFill" id="zp3-aA-t6F">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -230,16 +230,21 @@
                                 </connections>
                             </tableView>
                             <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="DFd-XZ-TgZ">
-                                <rect key="frame" x="264" y="678" width="240" height="262"/>
+                                <rect key="frame" x="584" y="833" width="184" height="127"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="w2u-xd-4zP">
+                                <rect key="frame" x="0.0" y="832" width="768" height="138"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="dcA-rj-cec"/>
                     <connections>
                         <outlet property="fluencyBoosterTableView" destination="cLb-HT-FiQ" id="kgn-sS-jYf"/>
+                        <outlet property="footerImageView" destination="w2u-xd-4zP" id="VR9-XF-nqy"/>
                         <outlet property="introHelpImageView" destination="DFd-XZ-TgZ" id="HY6-4B-hjy"/>
                     </connections>
                 </viewController>
@@ -267,7 +272,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1756" y="-448"/>
+            <point key="canvasLocation" x="2309" y="-216"/>
         </scene>
     </scenes>
     <classes>
@@ -287,6 +292,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/KKFluencyBoosterSelectionViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="fluencyBoosterTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="footerImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="introHelpImageView" candidateClass="UIImageView"/>
             </relationships>
         </class>

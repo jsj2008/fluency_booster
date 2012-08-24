@@ -14,8 +14,10 @@
 
 @interface KKFluencyBoosterSelectionViewController : KKAncestorViewController <UITableViewDataSource,UITableViewDelegate>
 
+@property (strong) NSManagedObjectContext* managedObjectContext;
+
+//Propertys de Sub-views.
 @property (strong, nonatomic) IBOutlet UITableView *fluencyBoosterTableView;
 
-@property (strong) NSManagedObjectContext* managedObjectContext;
 
 @end

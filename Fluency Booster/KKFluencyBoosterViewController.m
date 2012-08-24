@@ -63,12 +63,7 @@
     
     self.helpImageFileNameWithExtension = @"help3.png";
     
-    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self wargingPath]] forState:UIControlStateNormal];
-    
-    [self.cleanMarksButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-    [self.cleanMarksButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
-    [self.cleanMarksButton setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
-    [self.cleanMarksButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.markPath stringByAppendingPathComponent:@"mark.png"]] forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload
@@ -108,14 +103,6 @@
     }
     
     [self.carousel reloadData];
-}
-
--(NSString*)wargingPath{
-    NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-    NSString* fluencyBoosterResourcesPath = [resourcePath stringByAppendingPathComponent:@"FluencyBoosterResources"];
-    NSString* checkPath = [fluencyBoosterResourcesPath stringByAppendingPathComponent:@"Mark"];
-    NSString* warningPath = [checkPath stringByAppendingPathComponent:@"mark.png"];
-    return warningPath;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -184,7 +171,7 @@
     
     //set warning
     if (miniCard.attentionCheck) {
-        warningImageView.image = [UIImage imageWithContentsOfFile:[self wargingPath]];
+        warningImageView.image = [UIImage imageWithContentsOfFile:[self.markPath stringByAppendingPathComponent:@"mark.png"]];
     }
 	
 	return view;

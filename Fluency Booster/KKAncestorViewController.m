@@ -14,16 +14,37 @@
 
 @implementation KKAncestorViewController
 
-@synthesize helpResourcesPath = _helpResourcesPath;
+@synthesize resourcePath = _resourcePath;
+@synthesize fluencyBoosterResourcesPath = _fluencyBoosterResourcesPath;
+@synthesize fluencyBoostersPath = _fluencyBoostersPath;
+@synthesize helpPath = _helpPath;
+@synthesize iconPath = _iconPath;
+@synthesize markPath = _markPath;
+@synthesize screenPath = _screenPath;
+@synthesize splashPath = _splashPath;
+
 @synthesize helpImageFileNameWithExtension = _helpImageFileNameWithExtension;
 
-NSString* const helpViewControllerIdentifier = @"KKHelpViewController";
+NSString* const HELP_VIEW_CONTROLLER_IDENTIFIER = @"KKHelpViewController";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+NSString* const FLUENCY_BOOSTER_RESOURCES = @"FluencyBoosterResources";
+NSString* const FLUENCY_BOOSTERS = @"Fluency Boosters";
+NSString* const HELP = @"Help";
+NSString* const ICON = @"Icon";
+NSString* const MARK = @"Mark";
+NSString* const SCREEN = @"Screen";
+NSString* const SPLASH = @"Splash";
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.resourcePath = [[NSBundle mainBundle] resourcePath];
+        self.fluencyBoosterResourcesPath = [self.resourcePath stringByAppendingPathComponent:FLUENCY_BOOSTER_RESOURCES];
+        self.fluencyBoostersPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:FLUENCY_BOOSTERS];
+        self.helpPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:HELP];
+        self.iconPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:ICON];
+        self.markPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:MARK];
+        self.screenPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:SCREEN];
+        self.splashPath = [self.fluencyBoosterResourcesPath stringByAppendingPathComponent:SPLASH];
     }
     return self;
 }
@@ -32,10 +53,6 @@ NSString* const helpViewControllerIdentifier = @"KKHelpViewController";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-    NSString* fluencyBoosterResourcesPath = [resourcePath stringByAppendingPathComponent:@"FluencyBoosterResources"];
-    self.helpResourcesPath = [fluencyBoosterResourcesPath stringByAppendingPathComponent:@"Help"];
-    
     UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(presentHelp)];
     swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:swipeUpGestureRecognizer];
@@ -49,17 +66,16 @@ NSString* const helpViewControllerIdentifier = @"KKHelpViewController";
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 -(void)presentHelp{
-    NSString* helpImagePath = [self.helpResourcesPath stringByAppendingPathComponent:self.helpImageFileNameWithExtension];
+    NSString* helpImagePath = [self.helpPath stringByAppendingPathComponent:self.helpImageFileNameWithExtension];
     
-    KKHelpViewController* helpViewController = [self.storyboard instantiateViewControllerWithIdentifier:helpViewControllerIdentifier];
+    KKHelpViewController* helpViewController = [self.storyboard instantiateViewControllerWithIdentifier:HELP_VIEW_CONTROLLER_IDENTIFIER];
     helpViewController.delegate = self;
     helpViewController.helpImagePath = helpImagePath;
     [self presentViewController:helpViewController animated:YES completion:nil];
-    
 }
 
 #pragma mark - KKHelpViewControllerDelegate

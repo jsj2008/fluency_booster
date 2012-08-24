@@ -17,6 +17,7 @@
 
 @property(strong) NSArray* fluencyBoosters;
 @property (strong, nonatomic) IBOutlet UIImageView *introHelpImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
 
 @end
 
@@ -26,6 +27,7 @@
 
 @synthesize fluencyBoosters;
 @synthesize introHelpImageView;
+@synthesize footerImageView;
 
 @synthesize managedObjectContext;
 
@@ -36,6 +38,14 @@
 	{
 		KKAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
         self.managedObjectContext = appDelegate.managedObjectContext;
+        
+        NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]init];
+        NSEntityDescription* entity = [NSEntityDescription entityForName:@"KKFluencyBooster" inManagedObjectContext:self.managedObjectContext];
+        fetchRequest.entity = entity;
+        NSError* erro;
+        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+        NSArray* sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        self.fluencyBoosters = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&erro] sortedArrayUsingDescriptors:sortDescriptors];
 	}
 	return self;
     
@@ -43,27 +53,19 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
+    [super viewDidLoad];    
     //Make the background of the table view transparent
     //We can set the fluencyBoosterTableView.backgroundView to a ImageView.
     self.fluencyBoosterTableView.backgroundView = nil;
     
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]init];
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"KKFluencyBooster" inManagedObjectContext:self.managedObjectContext];
-    fetchRequest.entity = entity;
-    
-    NSError* erro;
-    NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    NSArray* sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    self.fluencyBoosters = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&erro] sortedArrayUsingDescriptors:sortDescriptors];
-    
     self.title = @"Fluency Booster";
+
+    UIImage* footer = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    self.footerImageView.image = footer;
     
     self.helpImageFileNameWithExtension = @"help1.png";
     
-    self.introHelpImageView.image = [UIImage imageWithContentsOfFile:[self.helpResourcesPath stringByAppendingPathComponent:@"0.png"]];
+    self.introHelpImageView.image = [UIImage imageWithContentsOfFile:[self.helpPath stringByAppendingPathComponent:@"openHelp.png"]];
 }
 
 -(void)presentIntroHelp{
@@ -80,6 +82,7 @@
 {
     [self setFluencyBoosterTableView:nil];
     [self setIntroHelpImageView:nil];
+    [self setFooterImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -98,7 +101,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
-//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
