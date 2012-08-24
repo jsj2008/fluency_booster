@@ -28,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *currentPageIndexTextField;
 @property (strong, nonatomic) IBOutlet UILabel *totalPagesLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
+@property (strong, nonatomic) IBOutlet UIButton *cleanMarksButton;
 
 
 //Delegate

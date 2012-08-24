@@ -61,7 +61,7 @@
     CGRect pageViewRect = self.view.bounds;
     self.pageViewController.view.frame = pageViewRect;
     
-    self.helpImageFileNameWithExtension = @"2.png";
+    self.helpImageFileNameWithExtension = @"help2.png";
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

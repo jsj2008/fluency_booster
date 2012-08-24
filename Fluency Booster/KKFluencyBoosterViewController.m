@@ -27,6 +27,7 @@
 @synthesize currentPageIndexTextField = _currentPageIndexTextField;
 @synthesize totalPagesLabel = _totalPagesLabel;
 @synthesize backgroundImage = _backgroundImage;
+@synthesize cleanMarksButton = _cleanMarksButton;
 
 //Delegate
 @synthesize delegate = _delegate;
@@ -60,8 +61,14 @@
     
     [self changeBackgroundImageToImageOfCard:[self.cards objectAtIndex:self.carousel.currentItemIndex]];
     
-    self.helpImageFileNameWithExtension = @"3.png";
+    self.helpImageFileNameWithExtension = @"help3.png";
     
+    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self wargingPath]] forState:UIControlStateNormal];
+    
+    [self.cleanMarksButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [self.cleanMarksButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [self.cleanMarksButton setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+    [self.cleanMarksButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateHighlighted];
 }
 
 - (void)viewDidUnload
@@ -70,6 +77,7 @@
     [self setCurrentPageIndexTextField:nil];
     [self setTotalPagesLabel:nil];
     [self setBackgroundImage:nil];
+    [self setCleanMarksButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -100,6 +108,14 @@
     }
     
     [self.carousel reloadData];
+}
+
+-(NSString*)wargingPath{
+    NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString* fluencyBoosterResourcesPath = [resourcePath stringByAppendingPathComponent:@"FluencyBoosterResources"];
+    NSString* checkPath = [fluencyBoosterResourcesPath stringByAppendingPathComponent:@"Mark"];
+    NSString* warningPath = [checkPath stringByAppendingPathComponent:@"mark.png"];
+    return warningPath;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -143,7 +159,7 @@
 	//create new view if no view is available for recycling
 	if (view == nil)
 	{
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 400.0f, 500.0f)];
+        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 478.0f, 461.0f)];
         view.backgroundColor = [UIColor lightGrayColor];
         
         miniCardImageView = [[UIImageView alloc] init];
@@ -168,11 +184,7 @@
     
     //set warning
     if (miniCard.attentionCheck) {
-        NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
-        NSString* fluencyBoosterResourcesPath = [resourcePath stringByAppendingPathComponent:@"FluencyBoosterResources"];
-        NSString* checkPath = [fluencyBoosterResourcesPath stringByAppendingPathComponent:@"Check"];
-        NSString* warningPath = [checkPath stringByAppendingPathComponent:@"warning.png"];
-        warningImageView.image = [UIImage imageWithContentsOfFile:warningPath];
+        warningImageView.image = [UIImage imageWithContentsOfFile:[self wargingPath]];
     }
 	
 	return view;

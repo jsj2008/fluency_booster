@@ -61,7 +61,7 @@
     
     self.title = @"Fluency Booster";
     
-    self.helpImageFileNameWithExtension = @"1.png";
+    self.helpImageFileNameWithExtension = @"help1.png";
     
     self.introHelpImageView.image = [UIImage imageWithContentsOfFile:[self.helpResourcesPath stringByAppendingPathComponent:@"0.png"]];
 }
