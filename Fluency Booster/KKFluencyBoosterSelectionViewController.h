@@ -16,8 +16,4 @@
 
 @property (strong) NSManagedObjectContext* managedObjectContext;
 
-//Propertys de Sub-views.
-@property (strong, nonatomic) IBOutlet UITableView *fluencyBoosterTableView;
-
-
 @end

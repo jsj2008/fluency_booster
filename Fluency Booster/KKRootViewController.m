@@ -10,7 +10,7 @@
 
 #import "KKDataViewController.h"
 
-#import "KKCardsDataSource.h"
+
 
 #import "KKHelpViewController.h"
 
@@ -18,7 +18,6 @@
 
 @interface KKRootViewController ()
 
-@property (strong,nonatomic) KKCardsDataSource* cardsDataSource;
 @end
 
 @implementation KKRootViewController
@@ -48,6 +47,7 @@
     }
     
     KKDataViewController* startingViewController = [self.cardsDataSource viewControllerAtIndex:index storyboard:self.storyboard];
+    startingViewController.rootViewController = self;
     NSArray *viewControllers = @[startingViewController];
     
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
@@ -60,8 +60,6 @@
     //For some reason the page view was lowered so a added the lines below to make things straight.
     CGRect pageViewRect = self.view.bounds;
     self.pageViewController.view.frame = pageViewRect;
-    
-    self.helpImageFileNameWithExtension = @"help2.png";
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

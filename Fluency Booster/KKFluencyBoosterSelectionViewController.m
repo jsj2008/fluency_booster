@@ -16,8 +16,11 @@
 @interface KKFluencyBoosterSelectionViewController ()
 
 @property(strong) NSArray* fluencyBoosters;
+@property (strong, nonatomic) IBOutlet UITableView *fluencyBoosterTableView;
 @property (strong, nonatomic) IBOutlet UIImageView *introHelpImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @end
 
@@ -28,6 +31,8 @@
 @synthesize fluencyBoosters;
 @synthesize introHelpImageView;
 @synthesize footerImageView;
+@synthesize headerImageView;
+@synthesize backgroundImageView;
 
 @synthesize managedObjectContext;
 
@@ -58,24 +63,12 @@
     //We can set the fluencyBoosterTableView.backgroundView to a ImageView.
     self.fluencyBoosterTableView.backgroundView = nil;
     
-    self.title = @"Fluency Booster";
-
-    UIImage* footer = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
-    self.footerImageView.image = footer;
+    self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerSelection.png"]];
+    self.backgroundImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"backgroundFluencyBoosterSelection.png"]];
+    self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    self.introHelpImageView.image = [UIImage imageWithContentsOfFile:[self.helpPath stringByAppendingPathComponent:@"openHelp.png"]];
     
     self.helpImageFileNameWithExtension = @"help1.png";
-    
-    self.introHelpImageView.image = [UIImage imageWithContentsOfFile:[self.helpPath stringByAppendingPathComponent:@"openHelp.png"]];
-}
-
--(void)presentIntroHelp{
-    self.introHelpImageView.hidden = NO;
-    NSTimeInterval introDelay = 7;
-    [self performSelector:@selector(hideIntroHelp) withObject:self afterDelay:introDelay];
-}
-
--(void)hideIntroHelp{
-    self.introHelpImageView.hidden = YES;
 }
 
 - (void)viewDidUnload
@@ -83,19 +76,10 @@
     [self setFluencyBoosterTableView:nil];
     [self setIntroHelpImageView:nil];
     [self setFooterImageView:nil];
+    [self setHeaderImageView:nil];
+    [self setBackgroundImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    NSTimeInterval delay = 3.0;
-    [self performSelector:@selector(presentIntroHelp) withObject:self afterDelay:delay];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self hideIntroHelp];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
