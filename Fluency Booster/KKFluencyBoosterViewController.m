@@ -15,6 +15,9 @@
 @interface KKFluencyBoosterViewController ()
 
 @property BOOL wrap;
+@property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 
 -(void)changeBackgroundImageToImageOfCard:(KKCard*)card;
 
@@ -28,6 +31,9 @@
 @synthesize totalPagesLabel = _totalPagesLabel;
 @synthesize backgroundImage = _backgroundImage;
 @synthesize cleanMarksButton = _cleanMarksButton;
+@synthesize headerImageView = _headerImageView;
+@synthesize footerImageView = _footerImageView;
+@synthesize backButton = _backButton;
 
 //Delegate
 @synthesize delegate = _delegate;
@@ -64,6 +70,11 @@
     self.helpImageFileNameWithExtension = @"help3.png";
     
     [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.markPath stringByAppendingPathComponent:@"mark.png"]] forState:UIControlStateNormal];
+    
+    self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
+    self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    
+    [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload
@@ -73,6 +84,9 @@
     [self setTotalPagesLabel:nil];
     [self setBackgroundImage:nil];
     [self setCleanMarksButton:nil];
+    [self setFooterImageView:nil];
+    [self setHeaderImageView:nil];
+    [self setBackButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -103,6 +117,9 @@
     }
     
     [self.carousel reloadData];
+}
+- (IBAction)back:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -155,7 +172,7 @@
         [view addSubview:miniCardImageView];
         
         warningImageView = [[UIImageView alloc] init];
-        warningImageView.frame = CGRectMake(350, 0, 50, 50);
+        warningImageView.frame = CGRectMake(420, 10, 58, 51);
         warningImageView.tag = 101;
         [view addSubview:warningImageView];
     }
@@ -171,7 +188,7 @@
     
     //set warning
     if (miniCard.attentionCheck) {
-        warningImageView.image = [UIImage imageWithContentsOfFile:[self.markPath stringByAppendingPathComponent:@"mark.png"]];
+        warningImageView.image = [UIImage imageWithContentsOfFile:[self.markPath stringByAppendingPathComponent:@"warningYellow.png"]];
     }
 	
 	return view;

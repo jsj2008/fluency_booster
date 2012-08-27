@@ -7,23 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KKAncestorViewController.h"
 #import "KKFluencyBoosterViewController.h"
 @class KKRootViewController;
 
-@interface KKDataViewController : KKAncestorViewController <UIGestureRecognizerDelegate>
+@interface KKDataViewController : UIViewController
 
 @property (strong, nonatomic) id dataObject;
 @property (strong, nonatomic) IBOutlet UIImageView *cardImageView;
-@property (strong, nonatomic) IBOutlet UIButton *checkCardButton;
-@property (strong, nonatomic) IBOutlet UIButton *backButton;
-@property (strong, nonatomic) IBOutlet UIButton *gotoButton;
 
 @property (strong) KKRootViewController* rootViewController;
-
-
-- (IBAction)checkCard:(UIButton *)sender;
-- (IBAction)back:(UIButton *)sender;
 
 
 @end

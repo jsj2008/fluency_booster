@@ -17,14 +17,25 @@
 #import "KKCard.h"
 
 @interface KKRootViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *gotoButton;
 
 @end
 
 @implementation KKRootViewController
+@synthesize headerImageView = _headerImageView;
+@synthesize footerImageView = _footerImageView;
+@synthesize backButton = _backButton;
+@synthesize gotoButton = _gotoButton;
 
 @synthesize cardsDataSource = _cardsDataSource;
 @synthesize fluencyBooster = _fluencyBooster;
 @synthesize managedObjectContext = _managedObjectContext;
+
+int const yPageViewPosition = 136;
+int const pageViewHeight = 732;
 
 - (void)viewDidLoad
 {
@@ -59,7 +70,14 @@
     
     //For some reason the page view was lowered so a added the lines below to make things straight.
     CGRect pageViewRect = self.view.bounds;
-    self.pageViewController.view.frame = pageViewRect;
+    self.pageViewController.view.frame = CGRectMake(0, yPageViewPosition, pageViewRect.size.width, pageViewHeight);
+    
+    self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
+    [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
+    [self.gotoButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"goto.png"]] forState:UIControlStateNormal];
+    self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    
+    self.helpImageFileNameWithExtension = @"help2.png";
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -72,6 +90,10 @@
 
 - (void)viewDidUnload
 {
+    [self setHeaderImageView:nil];
+    [self setFooterImageView:nil];
+    [self setBackButton:nil];
+    [self setGotoButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -98,6 +120,9 @@
         NSInteger index = (NSInteger)[self.cardsDataSource indexOfViewController:[[self.pageViewController viewControllers] lastObject]];
         destinationViewController.indexOfFirstMiniCard = index;
     }
+}
+- (IBAction)back:(UIButton *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - KKFluencyBoosterViewControllerDelegate

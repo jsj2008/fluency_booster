@@ -12,8 +12,9 @@
 
 #import "KKFluencyBooster.h"
 #import "KKCardsDataSource.h"
+#import "KKAncestorViewController.h"
 
-@interface KKRootViewController : UIViewController <UIPageViewControllerDelegate, KKFluencyBoosterViewControllerDelegate>
+@interface KKRootViewController : KKAncestorViewController <UIPageViewControllerDelegate, KKFluencyBoosterViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong) KKFluencyBooster* fluencyBooster;

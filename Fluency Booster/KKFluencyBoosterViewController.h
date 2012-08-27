@@ -30,7 +30,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (strong, nonatomic) IBOutlet UIButton *cleanMarksButton;
 
-
 //Delegate
 @property (weak) id<KKFluencyBoosterViewControllerDelegate> delegate;
 
