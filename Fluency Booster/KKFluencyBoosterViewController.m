@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIImageView *titleImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *titleBalloonImageView;
 
 -(void)changeBackgroundImageToImageOfCard:(KKCard*)card;
 
@@ -34,6 +36,8 @@
 @synthesize headerImageView = _headerImageView;
 @synthesize footerImageView = _footerImageView;
 @synthesize backButton = _backButton;
+@synthesize titleImageView = _titleImageView;
+@synthesize titleBalloonImageView = _titleBalloonImageView;
 
 //Delegate
 @synthesize delegate = _delegate;
@@ -69,12 +73,17 @@
     
     self.helpImageFileNameWithExtension = @"help3.png";
     
-    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.markPath stringByAppendingPathComponent:@"mark.png"]] forState:UIControlStateNormal];
+    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"clearMark.png"]] forState:UIControlStateNormal];
     
     self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
     self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
     
     [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
+    
+    self.titleImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"title.png"]];
+    NSString* currentFluencyBoosterScreenFolderPath = [[self.fluencyBoostersPath stringByAppendingPathComponent:self.fluencyBooster.name] stringByAppendingPathComponent:@"screen"];
+    self.titleBalloonImageView.image = [UIImage imageWithContentsOfFile:[currentFluencyBoosterScreenFolderPath stringByAppendingPathComponent:@"titleBalloon.png"]];
+    [self.view bringSubviewToFront:self.titleBalloonImageView];
 }
 
 - (void)viewDidUnload
@@ -87,6 +96,8 @@
     [self setFooterImageView:nil];
     [self setHeaderImageView:nil];
     [self setBackButton:nil];
+    [self setTitleImageView:nil];
+    [self setTitleBalloonImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

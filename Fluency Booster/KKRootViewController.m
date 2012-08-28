@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *gotoButton;
+@property (strong, nonatomic) IBOutlet UIImageView *titleImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *titleBallonImageView;
 
 @end
 
@@ -29,6 +31,8 @@
 @synthesize footerImageView = _footerImageView;
 @synthesize backButton = _backButton;
 @synthesize gotoButton = _gotoButton;
+@synthesize titleImageView = _titleImageView;
+@synthesize titleBallonImageView = _titleBallonImageView;
 
 @synthesize cardsDataSource = _cardsDataSource;
 @synthesize fluencyBooster = _fluencyBooster;
@@ -76,6 +80,10 @@ int const pageViewHeight = 732;
     [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
     [self.gotoButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"goto.png"]] forState:UIControlStateNormal];
     self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    self.titleImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"title.png"]];
+    NSString* currentFluencyBoosterScreenFolderPath = [[self.fluencyBoostersPath stringByAppendingPathComponent:self.fluencyBooster.name] stringByAppendingPathComponent:@"screen"];
+    self.titleBallonImageView.image = [UIImage imageWithContentsOfFile:[currentFluencyBoosterScreenFolderPath stringByAppendingPathComponent:@"titleBalloon.png"]];
+    [self.view bringSubviewToFront:self.titleBallonImageView];
     
     self.helpImageFileNameWithExtension = @"help2.png";
 }
@@ -94,6 +102,8 @@ int const pageViewHeight = 732;
     [self setFooterImageView:nil];
     [self setBackButton:nil];
     [self setGotoButton:nil];
+    [self setTitleImageView:nil];
+    [self setTitleBallonImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

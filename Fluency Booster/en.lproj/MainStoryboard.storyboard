@@ -19,7 +19,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Opc-he-mHF" userLabel="backButton">
-                                <rect key="frame" x="20" y="20" width="119" height="37"/>
+                                <rect key="frame" x="20" y="11" width="172" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                 <state key="normal">
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="c1g-e6-2eW" userLabel="gotoButton">
-                                <rect key="frame" x="609" y="20" width="139" height="37"/>
+                                <rect key="frame" x="555" y="10" width="193" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -52,6 +52,14 @@
                                 <rect key="frame" x="0.0" y="866" width="768" height="138"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Hwv-P3-2g4" userLabel="title">
+                                <rect key="frame" x="0.0" y="76" width="594" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="TOE-sk-4k0" userLabel="titleBalloon">
+                                <rect key="frame" x="594" y="63" width="82" height="81"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
@@ -64,6 +72,8 @@
                         <outlet property="footerImageView" destination="iT5-mP-e9l" id="3YW-pU-AIR"/>
                         <outlet property="gotoButton" destination="c1g-e6-2eW" id="eVt-wL-VFp"/>
                         <outlet property="headerImageView" destination="Uqp-4z-Uea" id="KOR-jQ-SEH"/>
+                        <outlet property="titleBallonImageView" destination="TOE-sk-4k0" id="yV9-Cs-kNM"/>
+                        <outlet property="titleImageView" destination="Hwv-P3-2g4" id="VYe-Mo-9iH"/>
                     </connections>
                 </viewController>
             </objects>
@@ -111,8 +121,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TNu-Se-Hlv">
-                                        <rect key="frame" x="444" y="805" width="67" height="61"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TNu-Se-Hlv" userLabel="clearMark">
+                                        <rect key="frame" x="444" y="805" width="287" height="51"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                         <state key="normal">
@@ -126,13 +136,6 @@
                                             <action selector="clearMarks:" destination="NMQ-ne-DnK" eventType="touchUpInside" id="noQ-71-g6f"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Clean Marks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="fpf-w9-cQy">
-                                        <rect key="frame" x="519" y="807" width="225" height="58"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="36"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" id="i43-hd-1ch" customClass="iCarousel">
                                         <rect key="frame" x="0.0" y="234" width="768" height="461"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -151,7 +154,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EFj-Ix-KTh" userLabel="backButton">
-                                        <rect key="frame" x="20" y="20" width="117" height="37"/>
+                                        <rect key="frame" x="20" y="20" width="172" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -165,6 +168,14 @@
                                             <action selector="back:" destination="NMQ-ne-DnK" eventType="touchUpInside" id="CV8-CD-yVf"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5F2-K8-28G" userLabel="title">
+                                        <rect key="frame" x="0.0" y="76" width="594" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="SCm-M5-hmZ" userLabel="titleBalloon">
+                                        <rect key="frame" x="596" y="63" width="82" height="81"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                             </view>
@@ -180,6 +191,8 @@
                         <outlet property="currentPageIndexTextField" destination="6iK-GG-EYG" id="yyL-Ow-7lx"/>
                         <outlet property="footerImageView" destination="I6R-vk-Vdd" id="dqO-d2-4W3"/>
                         <outlet property="headerImageView" destination="sDN-RA-BMQ" id="fvn-xS-wNg"/>
+                        <outlet property="titleBalloonImageView" destination="SCm-M5-hmZ" id="paK-yh-mzd"/>
+                        <outlet property="titleImageView" destination="5F2-K8-28G" id="Yhj-7v-YJE"/>
                         <outlet property="totalPagesLabel" destination="PEk-jd-Qsb" id="2H1-Gx-Dll"/>
                     </connections>
                 </viewController>
