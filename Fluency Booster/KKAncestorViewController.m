@@ -24,6 +24,7 @@
 @synthesize splashPath = _splashPath;
 
 @synthesize helpImageFileNameWithExtension = _helpImageFileNameWithExtension;
+@synthesize helpImageLandscapeFileNameWithExtension = _helpImageLandscapeFileNameWithExtension;
 
 NSString* const HELP_VIEW_CONTROLLER_IDENTIFIER = @"KKHelpViewController";
 
@@ -71,10 +72,12 @@ NSString* const SPLASH = @"Splash";
 
 -(void)presentHelp{
     NSString* helpImagePath = [self.helpPath stringByAppendingPathComponent:self.helpImageFileNameWithExtension];
+    NSString* helpImageLandscapePath = [self.helpPath stringByAppendingPathComponent:self.helpImageLandscapeFileNameWithExtension];
     
     KKHelpViewController* helpViewController = [self.storyboard instantiateViewControllerWithIdentifier:HELP_VIEW_CONTROLLER_IDENTIFIER];
     helpViewController.delegate = self;
     helpViewController.helpImagePath = helpImagePath;
+    helpViewController.helpImageLandscapePath = helpImageLandscapePath;
     [self presentViewController:helpViewController animated:YES completion:nil];
 }
 

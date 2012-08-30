@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *headerTitleImageView;
 
 @end
 
@@ -33,6 +34,7 @@
 @synthesize footerImageView;
 @synthesize headerImageView;
 @synthesize backgroundImageView;
+@synthesize headerTitleImageView;
 
 @synthesize managedObjectContext;
 
@@ -63,12 +65,16 @@
     //We can set the fluencyBoosterTableView.backgroundView to a ImageView.
     self.fluencyBoosterTableView.backgroundView = nil;
     
-    self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerSelection.png"]];
-    self.backgroundImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"backgroundFluencyBoosterSelection.png"]];
-    self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
     self.introHelpImageView.image = [UIImage imageWithContentsOfFile:[self.helpPath stringByAppendingPathComponent:@"openHelp.png"]];
+    self.headerTitleImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"title.png"]];
     
     self.helpImageFileNameWithExtension = @"help1.png";
+    self.helpImageLandscapeFileNameWithExtension = @"help1LS.png";
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload
@@ -78,13 +84,39 @@
     [self setFooterImageView:nil];
     [self setHeaderImageView:nil];
     [self setBackgroundImageView:nil];
+    [self setHeaderTitleImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    [self loadIntefaceToInterfaceOrientation:interfaceOrientation];
     return YES;
+}
+
+-(void)loadIntefaceToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    
+    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerSelection.png"]];
+        
+        self.backgroundImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"backgroundFluencyBoosterSelection.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+        
+        self.headerTitleImageView.frame = CGRectMake(0, 198, 594, 56);
+        
+    }else if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerSelectionLS.png"]];
+        
+        self.backgroundImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"backgroundFluencyBoosterSelectionLS.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
+        
+        self.headerTitleImageView.frame = CGRectMake(0, 133, 594, 56);
+    }
+    
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -116,14 +148,25 @@
     return 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 95;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"FluencyBoosterCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    cell.textLabel.text = [[self.fluencyBoosters objectAtIndex:indexPath.section] name];
-//    cell.textLabel.backgroundColor = [UIColor clearColor];
-//    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell.png"]];
+    UIImageView* cellImageView = (UIImageView*)[cell viewWithTag:100];
+    KKFluencyBooster* fluencyBoosterOfCurrentIndex = [self.fluencyBoosters objectAtIndex:indexPath.section];
+    cellImageView.image = [UIImage imageWithContentsOfFile:[[[self.fluencyBoostersPath
+                                                            stringByAppendingPathComponent:fluencyBoosterOfCurrentIndex.name]
+                                                            stringByAppendingPathComponent:@"screen"]
+                                                            stringByAppendingPathComponent:@"fluencyBoosterCell.png"]];
+    
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
+    backView.backgroundColor = [UIColor clearColor];
+    cell.backgroundView = backView;
     
     return cell;
 }

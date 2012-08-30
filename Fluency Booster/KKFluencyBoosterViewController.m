@@ -21,15 +21,13 @@
 @property (strong, nonatomic) IBOutlet UIImageView *titleImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *titleBalloonImageView;
 
--(void)changeBackgroundImageToImageOfCard:(KKCard*)card;
-
 @end
 
 @implementation KKFluencyBoosterViewController
 
 //Synthesize das Sub-Views.
 @synthesize carousel = _carousel;
-@synthesize currentPageIndexTextField = _currentPageIndexTextField;
+@synthesize currentPageIndexLabel = _currentPageIndexLabel;
 @synthesize totalPagesLabel = _totalPagesLabel;
 @synthesize backgroundImage = _backgroundImage;
 @synthesize cleanMarksButton = _cleanMarksButton;
@@ -57,39 +55,35 @@
 	// Do any additional setup after loading the view.
     self.carousel.currentItemIndex = self.indexOfFirstMiniCard;
     
-//    self.totalPagesLabel.text = [NSString stringWithFormat:@"%i",self.cards.count];
     self.totalPagesLabel.text = [NSString stringWithFormat:@"%i",self.fluencyBooster.cards.count];
     
-    self.currentPageIndexTextField.text = [NSString stringWithFormat:@"%i",self.carousel.currentItemIndex+1];
-    self.currentPageIndexTextField.keyboardType = UIKeyboardTypeNumberPad;
-    
-    self.title = self.fluencyBooster.name;
-    
-    UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(presentHelp)];
-    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-    [self.view addGestureRecognizer:swipeUpGestureRecognizer];
-    
-    [self changeBackgroundImageToImageOfCard:[self.cards objectAtIndex:self.carousel.currentItemIndex]];
-    
-    self.helpImageFileNameWithExtension = @"help3.png";
-    
-    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"clearMark.png"]] forState:UIControlStateNormal];
-    
-    self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
-    self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    self.currentPageIndexLabel.text = [NSString stringWithFormat:@"%i",self.carousel.currentItemIndex+1];
     
     [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
     
+    [self.cleanMarksButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"clearMark.png"]] forState:UIControlStateNormal];
+    
     self.titleImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"title.png"]];
+    
     NSString* currentFluencyBoosterScreenFolderPath = [[self.fluencyBoostersPath stringByAppendingPathComponent:self.fluencyBooster.name] stringByAppendingPathComponent:@"screen"];
+    
     self.titleBalloonImageView.image = [UIImage imageWithContentsOfFile:[currentFluencyBoosterScreenFolderPath stringByAppendingPathComponent:@"titleBalloon.png"]];
+    
+    self.helpImageFileNameWithExtension = @"help3.png";
+    self.helpImageLandscapeFileNameWithExtension = @"help3LS.png";
+    
     [self.view bringSubviewToFront:self.titleBalloonImageView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload
 {
     [self setCarousel:nil];
-    [self setCurrentPageIndexTextField:nil];
+    [self setCurrentPageIndexLabel:nil];
     [self setTotalPagesLabel:nil];
     [self setBackgroundImage:nil];
     [self setCleanMarksButton:nil];
@@ -104,18 +98,42 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self changeBackgroundImageToImageOfCard:[self.cards objectAtIndex:self.carousel.currentItemIndex]];
+    
+    if (interfaceOrientation == UIInterfaceOrientationPortrait ||
+        interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+        
+        self.backgroundImage.image = [UIImage imageWithContentsOfFile:[[self.cards objectAtIndex:self.carousel.currentItemIndex]imagePortraitPath]];
+        
+        self.titleImageView.frame = CGRectMake(0, 111, 594.0f, 56.0f);
+        self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
+                                                      98,
+                                                      82.0f,
+                                                      81.0f);
+        
+    }else if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+              interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
+        
+        self.backgroundImage.image = [UIImage imageWithContentsOfFile:[[self.cards objectAtIndex:self.carousel.currentItemIndex]imageLandscapePath]];
+            
+        self.titleImageView.frame = CGRectMake(0, 68, 594.0f, 56.0f);
+        self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
+                                                      54,
+                                                      82.0f,
+                                                      81.0f);
+    }
+    
+    [self.carousel reloadData];
+    
     return YES;
-}
-
--(void)changeBackgroundImageToImageOfCard:(KKCard *)card{
-    UIInterfaceOrientation interfaceOrientation = self.interfaceOrientation;
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        self.backgroundImage.image = [UIImage imageWithContentsOfFile:card.imageLandscapePath];
-    }
-    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.backgroundImage.image = [UIImage imageWithContentsOfFile:card.imagePortraitPath];
-    }
 }
 
 - (IBAction)clearMarks:(UIButton *)sender {
@@ -157,8 +175,7 @@
 }
 
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel{
-    self.currentPageIndexTextField.text = [NSString stringWithFormat:@"%i",self.carousel.currentItemIndex+1];
-    [self changeBackgroundImageToImageOfCard:[self.cards objectAtIndex:self.carousel.currentItemIndex]];
+    self.currentPageIndexLabel.text = [NSString stringWithFormat:@"%i",self.carousel.currentItemIndex+1];
 }
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
@@ -174,18 +191,30 @@
 	//create new view if no view is available for recycling
 	if (view == nil)
 	{
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 478.0f, 461.0f)];
+        view = [[UIImageView alloc] init];
         view.backgroundColor = [UIColor lightGrayColor];
         
         miniCardImageView = [[UIImageView alloc] init];
-        miniCardImageView.frame = view.bounds;
         miniCardImageView.tag = 100;
         [view addSubview:miniCardImageView];
         
         warningImageView = [[UIImageView alloc] init];
-        warningImageView.frame = CGRectMake(420, 10, 58, 51);
         warningImageView.tag = 101;
         [view addSubview:warningImageView];
+        
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait ||
+            self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+        {
+            view.frame = CGRectMake(0, 0, 478.0f, 461.0f);
+            warningImageView.frame = CGRectMake(410, 10, 58, 51);
+            
+        }else if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+                  self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+        {
+            view.frame = CGRectMake(0, 0, 359.0f, 346.0f);
+            warningImageView.frame = CGRectMake(291, 10, 58, 51);
+        }
+        miniCardImageView.frame = view.bounds;
     }
     else
 	{

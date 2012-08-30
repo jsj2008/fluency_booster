@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *gotoButton;
 @property (strong, nonatomic) IBOutlet UIImageView *titleImageView;
-@property (strong, nonatomic) IBOutlet UIImageView *titleBallonImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *titleBalloonImageView;
 
 @end
 
@@ -32,14 +32,11 @@
 @synthesize backButton = _backButton;
 @synthesize gotoButton = _gotoButton;
 @synthesize titleImageView = _titleImageView;
-@synthesize titleBallonImageView = _titleBallonImageView;
+@synthesize titleBalloonImageView = _titleBalloonImageView;
 
 @synthesize cardsDataSource = _cardsDataSource;
 @synthesize fluencyBooster = _fluencyBooster;
 @synthesize managedObjectContext = _managedObjectContext;
-
-int const yPageViewPosition = 136;
-int const pageViewHeight = 732;
 
 - (void)viewDidLoad
 {
@@ -73,19 +70,28 @@ int const pageViewHeight = 732;
     [self.view addSubview:self.pageViewController.view];
     
     //For some reason the page view was lowered so a added the lines below to make things straight.
-    CGRect pageViewRect = self.view.bounds;
-    self.pageViewController.view.frame = CGRectMake(0, yPageViewPosition, pageViewRect.size.width, pageViewHeight);
+//    CGRect pageViewRect = self.view.bounds;
+//    self.pageViewController.view.frame = CGRectMake(0, yPageViewPosition, pageViewRect.size.width, pageViewHeight);
+//    self.pageViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
-    self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
-    [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
-    [self.gotoButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"goto.png"]] forState:UIControlStateNormal];
-    self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
-    self.titleImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"title.png"]];
     NSString* currentFluencyBoosterScreenFolderPath = [[self.fluencyBoostersPath stringByAppendingPathComponent:self.fluencyBooster.name] stringByAppendingPathComponent:@"screen"];
-    self.titleBallonImageView.image = [UIImage imageWithContentsOfFile:[currentFluencyBoosterScreenFolderPath stringByAppendingPathComponent:@"titleBalloon.png"]];
-    [self.view bringSubviewToFront:self.titleBallonImageView];
+    self.titleBalloonImageView.image = [UIImage imageWithContentsOfFile:[currentFluencyBoosterScreenFolderPath stringByAppendingPathComponent:@"titleBalloon.png"]];
+    
+    [self.backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"backButton.png"]] forState:UIControlStateNormal];
+    
+    [self.gotoButton setBackgroundImage:[UIImage imageWithContentsOfFile:[self.iconPath stringByAppendingPathComponent:@"goto.png"]] forState:UIControlStateNormal];
+    
+    self.titleImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"title.png"]];
+    
+    [self.view bringSubviewToFront:self.titleBalloonImageView];
     
     self.helpImageFileNameWithExtension = @"help2.png";
+    self.helpImageLandscapeFileNameWithExtension = @"help2LS.png";
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -103,13 +109,52 @@ int const pageViewHeight = 732;
     [self setBackButton:nil];
     [self setGotoButton:nil];
     [self setTitleImageView:nil];
-    [self setTitleBallonImageView:nil];
+    [self setTitleBalloonImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    
+    if (interfaceOrientation == UIInterfaceOrientationPortrait ||
+        interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+        
+        self.titleImageView.frame = CGRectMake(0, 111, 594.0f, 56.0f);
+        self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
+                                                      98,
+                                                      82.0f,
+                                                      81.0f);
+        
+        self.pageViewController.view.frame = CGRectMake(0,
+                                                        167,
+                                                        768,
+                                                        732);
+        
+    }else if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+             interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
+        
+        self.titleImageView.frame = CGRectMake(0, 68, 594.0f, 56.0f);
+        self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
+                                                      54,
+                                                      82.0f,
+                                                      81.0f);
+        
+        self.pageViewController.view.frame = CGRectMake(0,
+                                                        125,
+                                                        1024,
+                                                        542);
+    }
+    
     return YES;
 }
 

@@ -22,6 +22,7 @@
 @property (strong) NSString* splashPath;
 
 @property (strong) NSString* helpImageFileNameWithExtension;
+@property (strong) NSString* helpImageLandscapeFileNameWithExtension;
 
 -(void)presentHelp;
 

@@ -25,7 +25,7 @@
 
 //Propertys de Sub-views.
 @property (strong, nonatomic) IBOutlet iCarousel *carousel;
-@property (strong, nonatomic) IBOutlet UITextField *currentPageIndexTextField;
+@property (strong, nonatomic) IBOutlet UILabel*currentPageIndexLabel;
 @property (strong, nonatomic) IBOutlet UILabel *totalPagesLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (strong, nonatomic) IBOutlet UIButton *cleanMarksButton;

@@ -12,6 +12,7 @@
 		BE0B9E6F15D1BBEF006422E5 /* KKFluencyBooster.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0B9E6E15D1BBEF006422E5 /* KKFluencyBooster.m */; };
 		BE0D735315E5187700E8CDD5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0D735215E5187700E8CDD5 /* AVFoundation.framework */; };
 		BE11884415E3D390009A1891 /* KKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BE11884315E3D390009A1891 /* KKCard.m */; };
+		BE6E4BF215EE5C7F00F9EDF2 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BE6E4BF115EE5C7F00F9EDF2 /* Default-Landscape~ipad.png */; };
 		BE892C6815E7CD2E008657F7 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BE892C6715E7CD2E008657F7 /* Default-Portrait~ipad.png */; };
 		BE89773415D4191600A79688 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89773315D4191600A79688 /* iCarousel.m */; };
 		BE89773915D424E800A79688 /* KKFluencyBoosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89773815D424E800A79688 /* KKFluencyBoosterViewController.m */; };
@@ -41,6 +42,7 @@
 		BE11884215E3D390009A1891 /* KKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKCard.h; sourceTree = "<group>"; };
 		BE11884315E3D390009A1891 /* KKCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKCard.m; sourceTree = "<group>"; };
 		BE11884915E3DA75009A1891 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		BE6E4BF115EE5C7F00F9EDF2 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		BE892C6715E7CD2E008657F7 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		BE89773215D4191600A79688 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		BE89773315D4191600A79688 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		BEEBA0B615D0054B00E7279A = {
 			isa = PBXGroup;
 			children = (
+				BE6E4BF115EE5C7F00F9EDF2 /* Default-Landscape~ipad.png */,
 				BE892C6715E7CD2E008657F7 /* Default-Portrait~ipad.png */,
 				BEEBA0CB15D0054B00E7279A /* Fluency Booster */,
 				BEEBA0C415D0054B00E7279A /* Frameworks */,
@@ -271,6 +274,7 @@
 				BEEBA0E215D0054B00E7279A /* MainStoryboard.storyboard in Resources */,
 				BEE5DC4F15D3E670005FCFB5 /* FluencyBoosterResources in Resources */,
 				BE892C6815E7CD2E008657F7 /* Default-Portrait~ipad.png in Resources */,
+				BE6E4BF215EE5C7F00F9EDF2 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@
 @synthesize delegate = _delegate;
 @synthesize helpImageView = _helpImageView;
 @synthesize helpImagePath = _helpImagePath;
+@synthesize helpImageLandscapePath = _helpImageLandscapePath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,10 +32,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (self.helpImagePath != nil) {
-        self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImagePath];
-    }
-    
     UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeHelp)];
     swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     [self.view addGestureRecognizer:swipeDownGestureRecognizer];
@@ -49,7 +46,18 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    
+    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        if (self.helpImagePath) {
+            self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImagePath];
+        }
+    }else if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+        if (self.helpImageLandscapePath) {
+            self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImageLandscapePath];
+        }
+    }
+    
+    return YES;
 }
 - (void)closeHelp {
     [self.delegate closeHelpOfHelpViewController:self];

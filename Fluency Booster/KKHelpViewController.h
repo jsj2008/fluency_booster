@@ -21,5 +21,6 @@
 @property (weak) id<KKHelpViewControllerDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UIImageView *helpImageView;
 @property (strong) NSString* helpImagePath;
+@property (strong) NSString* helpImageLandscapePath;
 
 @end
