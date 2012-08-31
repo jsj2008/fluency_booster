@@ -15,6 +15,12 @@
 @interface KKFluencyBoosterViewController ()
 
 @property BOOL wrap;
+//Propertys de Sub-views.
+@property (strong, nonatomic) IBOutlet iCarousel *carousel;
+@property (strong, nonatomic) IBOutlet UILabel*currentPageIndexLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalPagesLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
+@property (strong, nonatomic) IBOutlet UIButton *cleanMarksButton;
 @property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
@@ -77,7 +83,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
+    [self adjustForInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload
@@ -98,9 +104,12 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    
-    if (interfaceOrientation == UIInterfaceOrientationPortrait ||
-        interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+    [self adjustForInterfaceOrientation:interfaceOrientation];
+    return YES;
+}
+
+-(void)adjustForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
     {
         
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
@@ -115,15 +124,15 @@
                                                       82.0f,
                                                       81.0f);
         
-    }else if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
-              interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    }
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
     {
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
         
         self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
         
         self.backgroundImage.image = [UIImage imageWithContentsOfFile:[[self.cards objectAtIndex:self.carousel.currentItemIndex]imageLandscapePath]];
-            
+        
         self.titleImageView.frame = CGRectMake(0, 68, 594.0f, 56.0f);
         self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
                                                       54,
@@ -132,8 +141,6 @@
     }
     
     [self.carousel reloadData];
-    
-    return YES;
 }
 
 - (IBAction)clearMarks:(UIButton *)sender {

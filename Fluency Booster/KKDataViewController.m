@@ -6,14 +6,13 @@
 //  Copyright (c) 2012 Arthur Rocha de Menezes. All rights reserved.*
 //
 #import <AVFoundation/AVFoundation.h>
-
+#import "KKRootViewController.h"
 #import "KKDataViewController.h"
-
 #import "KKCard.h"
 
-#import "KKRootViewController.h"
-
 @interface KKDataViewController ()
+
+@property (strong, nonatomic) IBOutlet UIImageView *cardImageView;
 
 @end
 
@@ -21,8 +20,6 @@
 
 
 @synthesize cardImageView;
-
-@synthesize rootViewController;
 
 - (void)viewDidLoad
 {
@@ -49,14 +46,15 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    
     KKCard* cardDataObject = self.dataObject;
     
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        self.cardImageView.image = [UIImage imageWithContentsOfFile:cardDataObject.imageLandscapePath];
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+        self.cardImageView.image = [UIImage imageWithContentsOfFile:cardDataObject.imagePortraitPath];
     }
     
-    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.cardImageView.image = [UIImage imageWithContentsOfFile:cardDataObject.imagePortraitPath];
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+        self.cardImageView.image = [UIImage imageWithContentsOfFile:cardDataObject.imageLandscapePath];
     }
     
     return YES;

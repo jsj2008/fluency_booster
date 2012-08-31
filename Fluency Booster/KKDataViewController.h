@@ -7,15 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KKFluencyBoosterViewController.h"
-@class KKRootViewController;
 
 @interface KKDataViewController : UIViewController
 
 @property (strong, nonatomic) id dataObject;
-@property (strong, nonatomic) IBOutlet UIImageView *cardImageView;
-
-@property (strong) KKRootViewController* rootViewController;
-
 
 @end

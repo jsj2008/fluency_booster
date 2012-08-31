@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "KKFluencyBoosterViewController.h"
-
-#import "KKFluencyBooster.h"
-#import "KKCardsDataSource.h"
 #import "KKAncestorViewController.h"
+#import "KKFluencyBoosterViewController.h"
+#import "KKCardsDataSource.h"
+#import "KKFluencyBooster.h"
+
+
 
 @interface KKRootViewController : KKAncestorViewController <UIPageViewControllerDelegate, KKFluencyBoosterViewControllerDelegate>
 
-@property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong) KKFluencyBooster* fluencyBooster;
 @property (strong,nonatomic) KKCardsDataSource* cardsDataSource;
 @property (strong) NSManagedObjectContext* managedObjectContext;

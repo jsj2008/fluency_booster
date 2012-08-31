@@ -7,16 +7,14 @@
 //
 
 #import "KKRootViewController.h"
-
 #import "KKDataViewController.h"
-
-
+#import "KKCard.h"
 
 #import "KKHelpViewController.h"
 
-#import "KKCard.h"
-
 @interface KKRootViewController ()
+
+@property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
@@ -59,7 +57,6 @@
     }
     
     KKDataViewController* startingViewController = [self.cardsDataSource viewControllerAtIndex:index storyboard:self.storyboard];
-    startingViewController.rootViewController = self;
     NSArray *viewControllers = @[startingViewController];
     
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
@@ -68,11 +65,6 @@
     
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
-    
-    //For some reason the page view was lowered so a added the lines below to make things straight.
-//    CGRect pageViewRect = self.view.bounds;
-//    self.pageViewController.view.frame = CGRectMake(0, yPageViewPosition, pageViewRect.size.width, pageViewHeight);
-//    self.pageViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
     NSString* currentFluencyBoosterScreenFolderPath = [[self.fluencyBoostersPath stringByAppendingPathComponent:self.fluencyBooster.name] stringByAppendingPathComponent:@"screen"];
     self.titleBalloonImageView.image = [UIImage imageWithContentsOfFile:[currentFluencyBoosterScreenFolderPath stringByAppendingPathComponent:@"titleBalloon.png"]];
@@ -91,7 +83,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
+    [self adjustForInterfaceOrientation:self.interfaceOrientation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -116,9 +108,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    
-    if (interfaceOrientation == UIInterfaceOrientationPortrait ||
-        interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+    [self adjustForInterfaceOrientation:interfaceOrientation];
+    return YES;
+}
+
+
+-(void)adjustForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
     {
         
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
@@ -136,8 +132,7 @@
                                                         768,
                                                         732);
         
-    }else if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
-             interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    }else if(UIInterfaceOrientationIsLandscape(interfaceOrientation))
     {
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
         
@@ -154,8 +149,6 @@
                                                         1024,
                                                         542);
     }
-    
-    return YES;
 }
 
 -(KKCardsDataSource*)cardsDataSource{
@@ -192,6 +185,10 @@
 
 #pragma mark - UIPageViewController delegate methods
 
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed{
+    [self adjustForInterfaceOrientation:pageViewController.interfaceOrientation];
+}
+
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation)) {
@@ -202,6 +199,7 @@
         self.pageViewController.doubleSided = NO;
         return UIPageViewControllerSpineLocationMin;
     }
+    
     return UIPageViewControllerSpineLocationMin;
 }
 

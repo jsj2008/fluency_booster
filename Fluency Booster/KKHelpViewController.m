@@ -10,6 +10,8 @@
 
 @interface KKHelpViewController ()
 
+@property (strong, nonatomic) IBOutlet UIImageView *helpImageView;
+
 @end
 
 @implementation KKHelpViewController
@@ -47,11 +49,12 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     
-    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
         if (self.helpImagePath) {
             self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImagePath];
         }
-    }else if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    }
+    if(UIInterfaceOrientationIsLandscape(interfaceOrientation)){
         if (self.helpImageLandscapePath) {
             self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImageLandscapePath];
         }
