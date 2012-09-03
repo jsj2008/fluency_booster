@@ -14,6 +14,8 @@
 
 @implementation KKAncestorViewController
 
+@synthesize helpImageView = _helpImageView;
+
 @synthesize resourcePath = _resourcePath;
 @synthesize fluencyBoosterResourcesPath = _fluencyBoosterResourcesPath;
 @synthesize fluencyBoostersPath = _fluencyBoostersPath;
@@ -57,6 +59,17 @@ NSString* const SPLASH = @"Splash";
     UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(presentHelp)];
     swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:swipeUpGestureRecognizer];
+    
+    UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeHelp)];
+    swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDownGestureRecognizer];
+    
+    CGRect helpViewFrameOut = self.view.frame;
+    helpViewFrameOut.origin.y = helpViewFrameOut.size.height;
+    self.helpImageView = [[UIImageView alloc] initWithFrame:helpViewFrameOut];
+    self.helpImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    [self.view addSubview:self.helpImageView];
+    [self.view bringSubviewToFront:self.helpImageView];
 }
 
 - (void)viewDidUnload
@@ -67,24 +80,55 @@ NSString* const SPLASH = @"Splash";
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+        self.helpImageView.image = [UIImage imageWithContentsOfFile:
+                                    [self.helpPath stringByAppendingPathComponent:self.helpImageFileNameWithExtension]];
+        
+        
+        
+    }
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        self.helpImageView.image = [UIImage imageWithContentsOfFile:
+                                    [self.helpPath stringByAppendingPathComponent:self.helpImageLandscapeFileNameWithExtension]];
+    }
     return YES;
 }
 
 -(void)presentHelp{
-    NSString* helpImagePath = [self.helpPath stringByAppendingPathComponent:self.helpImageFileNameWithExtension];
-    NSString* helpImageLandscapePath = [self.helpPath stringByAppendingPathComponent:self.helpImageLandscapeFileNameWithExtension];
-    
-    KKHelpViewController* helpViewController = [self.storyboard instantiateViewControllerWithIdentifier:HELP_VIEW_CONTROLLER_IDENTIFIER];
-    helpViewController.delegate = self;
-    helpViewController.helpImagePath = helpImagePath;
-    helpViewController.helpImageLandscapePath = helpImageLandscapePath;
-    [self presentViewController:helpViewController animated:YES completion:nil];
+    CGRect helpImageFrameIn = self.view.frame;
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options:UIViewAnimationCurveEaseOut
+                     animations:^{
+                         if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+                             self.helpImageView.frame = helpImageFrameIn;
+                         }
+                         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+                             self.helpImageView.frame = helpImageFrameIn;
+                         }
+                     } completion:^(BOOL fineshed){
+                         
+                     }
+     ];
 }
 
-#pragma mark - KKHelpViewControllerDelegate
-
--(void)closeHelpOfHelpViewController:(KKHelpViewController *)helpViewController{
-    [self dismissViewControllerAnimated:YES completion:nil];
+-(void)closeHelp{
+    CGRect helpImageFrameOut = self.view.frame;
+    helpImageFrameOut.origin.y = helpImageFrameOut.size.height*2;
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options:UIViewAnimationCurveEaseOut
+                     animations:^{
+                         if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+                             self.helpImageView.frame = helpImageFrameOut;
+                         }
+                         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+                             self.helpImageView.frame = helpImageFrameOut;
+                         }
+                     } completion:^(BOOL fineshed){
+                         
+                     }
+     ];
 }
 
 @end

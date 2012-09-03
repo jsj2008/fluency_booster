@@ -97,6 +97,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    [super shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     [self adjustImagesToInterfaceOrientation:interfaceOrientation];
     return YES;
 }

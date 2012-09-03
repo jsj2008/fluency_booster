@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "KKHelpViewController.h"
+@interface KKAncestorViewController : UIViewController
 
-@interface KKAncestorViewController : UIViewController<KKHelpViewControllerDelegate>
+@property (strong) UIImageView* helpImageView;
 
 @property (strong) NSString* resourcePath;
 @property (strong) NSString* fluencyBoosterResourcesPath;

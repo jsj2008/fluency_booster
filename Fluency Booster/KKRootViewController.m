@@ -79,6 +79,8 @@
     
     self.helpImageFileNameWithExtension = @"help2.png";
     self.helpImageLandscapeFileNameWithExtension = @"help2LS.png";
+    
+    [self.view bringSubviewToFront:self.helpImageView];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -113,6 +115,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    [super shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     [self adjustImagesToInterfaceOrientation:interfaceOrientation];
     return YES;
 }

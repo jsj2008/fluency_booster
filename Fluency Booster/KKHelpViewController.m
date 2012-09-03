@@ -44,6 +44,7 @@
     if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
         if (self.helpImagePath) {
             self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImagePath];
+            
         }
     }
     if(UIInterfaceOrientationIsLandscape(interfaceOrientation)){
@@ -51,7 +52,6 @@
             self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImageLandscapePath];
         }
     }
-    [self.delegate shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
     return YES;
 }
 - (void)closeHelp {
