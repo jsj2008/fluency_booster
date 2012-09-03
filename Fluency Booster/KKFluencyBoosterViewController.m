@@ -83,7 +83,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self adjustForInterfaceOrientation:self.interfaceOrientation];
+    [self adjustSizesAndPositionsForInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload
@@ -102,45 +102,55 @@
     // Release any retained subviews of the main view.
 }
 
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self adjustSizesAndPositionsForInterfaceOrientation:toInterfaceOrientation];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self adjustForInterfaceOrientation:interfaceOrientation];
+    [self adjustImagesToInterfaceOrientation:interfaceOrientation];
     return YES;
 }
 
--(void)adjustForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
-    {
-        
+-(void)adjustImagesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
         
         self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
         
         self.backgroundImage.image = [UIImage imageWithContentsOfFile:[[self.cards objectAtIndex:self.carousel.currentItemIndex]imagePortraitPath]];
-        
-        self.titleImageView.frame = CGRectMake(0, 111, 594.0f, 56.0f);
-        self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
-                                                      98,
-                                                      82.0f,
-                                                      81.0f);
-        
     }
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-    {
+    
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
         
         self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
         
         self.backgroundImage.image = [UIImage imageWithContentsOfFile:[[self.cards objectAtIndex:self.carousel.currentItemIndex]imageLandscapePath]];
         
+        
+    }
+    
+    [self.carousel reloadData];
+}
+
+-(void)adjustSizesAndPositionsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+        self.titleImageView.frame = CGRectMake(0, 111, 594.0f, 56.0f);
+        self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
+                                                      98,
+                                                      82.0f,
+                                                      81.0f);
+    }
+    
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
         self.titleImageView.frame = CGRectMake(0, 68, 594.0f, 56.0f);
         self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
                                                       54,
                                                       82.0f,
                                                       81.0f);
     }
-    
-    [self.carousel reloadData];
 }
 
 - (IBAction)clearMarks:(UIButton *)sender {

@@ -17,18 +17,10 @@
 @implementation KKHelpViewController
 
 @synthesize delegate = _delegate;
+
 @synthesize helpImageView = _helpImageView;
 @synthesize helpImagePath = _helpImagePath;
 @synthesize helpImageLandscapePath = _helpImageLandscapePath;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -59,7 +51,7 @@
             self.helpImageView.image = [UIImage imageWithContentsOfFile:self.helpImageLandscapePath];
         }
     }
-    
+    [self.delegate shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
     return YES;
 }
 - (void)closeHelp {

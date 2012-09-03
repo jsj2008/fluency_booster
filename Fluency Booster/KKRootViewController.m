@@ -83,7 +83,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self adjustForInterfaceOrientation:self.interfaceOrientation];
+    [self adjustSizesAndPositionsForInterfaceOrientation:self.interfaceOrientation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -106,21 +106,21 @@
     // Release any retained subviews of the main view.
 }
 
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self adjustSizesAndPositionsForInterfaceOrientation:toInterfaceOrientation];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self adjustForInterfaceOrientation:interfaceOrientation];
+    [self adjustImagesToInterfaceOrientation:interfaceOrientation];
     return YES;
 }
 
 
--(void)adjustForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+-(void)adjustSizesAndPositionsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
     {
-        
-        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
-        
-        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
-        
         self.titleImageView.frame = CGRectMake(0, 111, 594.0f, 56.0f);
         self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
                                                       98,
@@ -132,12 +132,9 @@
                                                         768,
                                                         732);
         
-    }else if(UIInterfaceOrientationIsLandscape(interfaceOrientation))
+    }
+    if(UIInterfaceOrientationIsLandscape(interfaceOrientation))
     {
-        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
-        
-        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
-        
         self.titleImageView.frame = CGRectMake(0, 68, 594.0f, 56.0f);
         self.titleBalloonImageView.frame = CGRectMake(594.0f + 10,
                                                       54,
@@ -148,6 +145,20 @@
                                                         125,
                                                         1024,
                                                         542);
+    }
+}
+
+-(void)adjustImagesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"header.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
+    }
+    
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+        self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerLS.png"]];
+        
+        self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
     }
 }
 
@@ -186,7 +197,7 @@
 #pragma mark - UIPageViewController delegate methods
 
 -(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed{
-    [self adjustForInterfaceOrientation:pageViewController.interfaceOrientation];
+    [self adjustSizesAndPositionsForInterfaceOrientation:pageViewController.interfaceOrientation];
 }
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation

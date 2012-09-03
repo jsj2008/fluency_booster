@@ -74,7 +74,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
+    [self adjustSizesAndPositionsToInterfaceOrientation:self.interfaceOrientation];
+    [self adjustImagesToInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload
@@ -89,35 +90,44 @@
     // Release any retained subviews of the main view.
 }
 
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self adjustSizesAndPositionsToInterfaceOrientation:toInterfaceOrientation];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self loadIntefaceToInterfaceOrientation:interfaceOrientation];
+    [self adjustImagesToInterfaceOrientation:interfaceOrientation];
     return YES;
 }
 
--(void)loadIntefaceToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    
+-(void)adjustSizesAndPositionsToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+        self.headerTitleImageView.frame = CGRectMake(0, 198, 594, 56);
+    }
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+        self.headerTitleImageView.frame = CGRectMake(0, 133, 594, 56);
+    }
+}
+
+-(void)adjustImagesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerSelection.png"]];
         
         self.backgroundImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"backgroundFluencyBoosterSelection.png"]];
         
         self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footer.png"]];
-        
-        self.headerTitleImageView.frame = CGRectMake(0, 198, 594, 56);
-        
     }
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+    {
         self.headerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"headerSelectionLS.png"]];
         
         self.backgroundImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"backgroundFluencyBoosterSelectionLS.png"]];
         
         self.footerImageView.image = [UIImage imageWithContentsOfFile:[self.screenPath stringByAppendingPathComponent:@"footerLS.png"]];
-        
-        self.headerTitleImageView.frame = CGRectMake(0, 133, 594, 56);
     }
-    
-    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

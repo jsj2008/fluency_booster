@@ -13,6 +13,7 @@
 @protocol KKHelpViewControllerDelegate <NSObject>
 
 -(void)closeHelpOfHelpViewController:(KKHelpViewController*) helpViewController;
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 @end
 

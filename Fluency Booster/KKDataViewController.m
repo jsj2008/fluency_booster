@@ -28,6 +28,9 @@
     UITapGestureRecognizer* doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkCard)];
     doubleTapGestureRecognizer.numberOfTapsRequired = 2;
     [self.view addGestureRecognizer:doubleTapGestureRecognizer];
+    
+    [self shouldAutorotateToInterfaceOrientation:self.interfaceOrientation];
+    
 }
 
 - (void)viewDidUnload
