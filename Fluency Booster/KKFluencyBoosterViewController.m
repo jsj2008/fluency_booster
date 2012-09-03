@@ -10,8 +10,6 @@
 
 #import "KKCard.h"
 
-#import "KKHelpViewController.h"
-
 @interface KKFluencyBoosterViewController ()
 
 @property BOOL wrap;

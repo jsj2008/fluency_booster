@@ -11,8 +11,6 @@
 #import "KKRootViewController.h"
 #import "KKAppDelegate.h"
 
-#import "KKHelpViewController.h"
-
 @interface KKFluencyBoosterSelectionViewController ()
 
 @property(strong) NSArray* fluencyBoosters;

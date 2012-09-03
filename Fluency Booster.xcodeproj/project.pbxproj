@@ -29,7 +29,6 @@
 		BEEBA0DC15D0054B00E7279A /* KKDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEBA0DB15D0054B00E7279A /* KKDataViewController.m */; };
 		BEEBA0E215D0054B00E7279A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEEBA0E015D0054B00E7279A /* MainStoryboard.storyboard */; };
 		BEEBA0EA15D005AF00E7279A /* KKFluencyBoosterSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEBA0E915D005AF00E7279A /* KKFluencyBoosterSelectionViewController.m */; };
-		BEEBA0F315D00FBA00E7279A /* KKHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEBA0F215D00FBA00E7279A /* KKHelpViewController.m */; };
 		BEEBA10E15D052CC00E7279A /* KKCardsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEBA10D15D052CC00E7279A /* KKCardsDataSource.m */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +68,6 @@
 		BEEBA0E115D0054B00E7279A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		BEEBA0E815D005AF00E7279A /* KKFluencyBoosterSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKFluencyBoosterSelectionViewController.h; sourceTree = "<group>"; };
 		BEEBA0E915D005AF00E7279A /* KKFluencyBoosterSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKFluencyBoosterSelectionViewController.m; sourceTree = "<group>"; };
-		BEEBA0F115D00FBA00E7279A /* KKHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKHelpViewController.h; sourceTree = "<group>"; };
-		BEEBA0F215D00FBA00E7279A /* KKHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKHelpViewController.m; sourceTree = "<group>"; };
 		BEEBA10C15D052CC00E7279A /* KKCardsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKCardsDataSource.h; sourceTree = "<group>"; };
 		BEEBA10D15D052CC00E7279A /* KKCardsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKCardsDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,15 +89,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE78B28D15D9A48900BF6104 /* Help */ = {
-			isa = PBXGroup;
-			children = (
-				BEEBA0F115D00FBA00E7279A /* KKHelpViewController.h */,
-				BEEBA0F215D00FBA00E7279A /* KKHelpViewController.m */,
-			);
-			name = Help;
-			sourceTree = "<group>";
-		};
 		BE78B28F15D9A4C000BF6104 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,7 +166,6 @@
 			children = (
 				BE78B29015D9A58F00BF6104 /* FluencyBooster */,
 				BE78B28F15D9A4C000BF6104 /* Cards */,
-				BE78B28D15D9A48900BF6104 /* Help */,
 				BE89773615D4192C00A79688 /* iCarousel */,
 				BEE5DC4815D3E289005FCFB5 /* Resources */,
 				BEEBA0F415D0141100E7279A /* Models */,
@@ -307,7 +294,6 @@
 				BEEBA0D915D0054B00E7279A /* KKRootViewController.m in Sources */,
 				BEEBA0DC15D0054B00E7279A /* KKDataViewController.m in Sources */,
 				BEEBA0EA15D005AF00E7279A /* KKFluencyBoosterSelectionViewController.m in Sources */,
-				BEEBA0F315D00FBA00E7279A /* KKHelpViewController.m in Sources */,
 				BEEBA10E15D052CC00E7279A /* KKCardsDataSource.m in Sources */,
 				BE0B9E1415D194DA006422E5 /* FluencyBooster.xcdatamodeld in Sources */,
 				BE0B9E6F15D1BBEF006422E5 /* KKFluencyBooster.m in Sources */,

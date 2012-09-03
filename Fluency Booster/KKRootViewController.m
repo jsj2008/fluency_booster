@@ -10,8 +10,6 @@
 #import "KKDataViewController.h"
 #import "KKCard.h"
 
-#import "KKHelpViewController.h"
-
 @interface KKRootViewController ()
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
